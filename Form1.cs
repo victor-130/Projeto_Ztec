@@ -12,6 +12,7 @@ namespace Projeto01
         string sql;
 
         string id;//variavel que pega o id do registro
+        string foto; //variavel que recebe a imagem
         public pricipal()
         {
             InitializeComponent();
@@ -23,8 +24,11 @@ namespace Projeto01
             grid.Columns[2].HeaderText = "End.";
             grid.Columns[4].HeaderText = "CPF";
             grid.Columns[3].HeaderText = "Tel.";
+            grid.Columns[5].HeaderText = "foto";
 
             grid.Columns[0].Visible = false;
+            grid.Columns[4].Visible = false;
+            grid.Columns[5].Visible = false;
         }
         private void ListarGrid() {
             con.abrirConexao();
@@ -154,17 +158,24 @@ namespace Projeto01
         }
         private void Excluir_Click(object sender, EventArgs e)
         {
-           
+
             Voltanovo();
-            var resposta = MessageBox.Show("Desaja realmente excluir esse cadastro?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            var resposta = MessageBox.Show("Deseja realmente excluir esse cadastro?", "Atenção", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (resposta == DialogResult.Yes)
             {
-                sql = "DELETE FROM clientes WHERE clientes.id = @id";
+                con.abrirConexao();
+                sql = "DELETE FROM clientes WHERE id=@id";
                 cmd = new MySqlCommand(sql, con.con);
-                MessageBox.Show("Cadastro excluido");
+                cmd.Parameters.AddWithValue("@id", id);
+                cmd.ExecuteNonQuery();
+                con.fecharConexao();
+                Voltanovo();
+                ListarGrid();
+
+                MessageBox.Show("Excluído com sucesso", "Excluir ", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            ListarGrid();
         }
+            
 
         private void btncancelar_Click(object sender, EventArgs e)
         {
@@ -228,10 +239,26 @@ namespace Projeto01
         {
 
         }
+        //metodo buscar por nome
+        private void BuscarNome()
+        {
+            con.abrirConexao();
+            sql = " SELECT * FROM clientes WHERE nome LIKE @nome ORDER by nome ASC"; //LIKE busca o nome por aproximação
+            cmd = new MySqlCommand(sql, con.con);
+            cmd.Parameters.AddWithValue("@nome", txtbusca.Text + "%"); // operador LIKE 
+            MySqlDataAdapter da = new MySqlDataAdapter();  
+            da.SelectCommand = cmd;
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+            grid.DataSource = dt;
+            con.fecharConexao();
 
+            formatarGD();
+
+        }
         private void txtbusca_TextChanged(object sender, EventArgs e)
         {
-
+            BuscarNome();
         }
 
         private void grid_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -251,6 +278,22 @@ namespace Projeto01
         private void grid_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        private void label5_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnimg_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+            dialog.Filter = "Imagens(*.jpg;*.png) | *.jpg; *.png";// mostra jpg e png
+            if(dialog.ShowDialog() == DialogResult.OK)
+            {
+                foto = dialog.FileName.ToString();//
+                image.ImageLocation = foto;
+            }
         }
     }
 }

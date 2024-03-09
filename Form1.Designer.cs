@@ -45,10 +45,11 @@
             this.txtbusca = new System.Windows.Forms.TextBox();
             this.lblbusca = new System.Windows.Forms.Label();
             this.grid = new System.Windows.Forms.DataGridView();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.image = new System.Windows.Forms.PictureBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnimg = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.grid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNome
@@ -195,7 +196,6 @@
             // 
             // txtbusca
             // 
-            this.txtbusca.Enabled = false;
             this.txtbusca.Location = new System.Drawing.Point(502, 48);
             this.txtbusca.Name = "txtbusca";
             this.txtbusca.Size = new System.Drawing.Size(279, 22);
@@ -227,30 +227,45 @@
             this.grid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellClick);
             this.grid.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.grid_CellContentClick);
             // 
-            // pictureBox1
+            // image
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(699, 89);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(82, 92);
-            this.pictureBox1.TabIndex = 19;
-            this.pictureBox1.TabStop = false;
+            this.image.BackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            this.image.Location = new System.Drawing.Point(839, 77);
+            this.image.Name = "image";
+            this.image.Size = new System.Drawing.Size(146, 116);
+            this.image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.image.TabIndex = 19;
+            this.image.TabStop = false;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(659, 89);
+            this.label5.Location = new System.Drawing.Point(747, 85);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(34, 16);
             this.label5.TabIndex = 20;
             this.label5.Text = "Foto";
+            this.label5.Click += new System.EventHandler(this.label5_Click_1);
+            // 
+            // btnimg
+            // 
+            this.btnimg.Location = new System.Drawing.Point(706, 120);
+            this.btnimg.Name = "btnimg";
+            this.btnimg.Size = new System.Drawing.Size(75, 23);
+            this.btnimg.TabIndex = 21;
+            this.btnimg.Text = "foto";
+            this.btnimg.UseVisualStyleBackColor = true;
+            this.btnimg.Click += new System.EventHandler(this.btnimg_Click);
             // 
             // pricipal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.MenuHighlight;
             this.ClientSize = new System.Drawing.Size(1228, 559);
+            this.Controls.Add(this.btnimg);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.image);
             this.Controls.Add(this.grid);
             this.Controls.Add(this.lblbusca);
             this.Controls.Add(this.txtbusca);
@@ -272,7 +287,7 @@
             this.Text = "Principal";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.grid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.image)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -297,8 +312,9 @@
         private System.Windows.Forms.TextBox txtbusca;
         private System.Windows.Forms.Label lblbusca;
         private System.Windows.Forms.DataGridView grid;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox image;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnimg;
     }
 }
 
